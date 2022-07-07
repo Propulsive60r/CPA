@@ -27,3 +27,34 @@ ${fontSizeTemplate[2]}
 
 entry.innerHTML = 'Hello World';
 
+class Rectangle {
+    width;
+    height;
+
+    constructor(w, h) {
+        this.width = w;
+        this.height = h;
+    }
+
+    calcArea () {
+        return this.width * this.height;
+    }
+}
+
+console.log(this)
+class User {
+
+    constructor(name) {
+        console.log(this)
+        this.name = name;
+    }
+
+    sayHi() {
+        console.log(this);
+    }
+
+}
+
+// Использование:
+let user = new User("Иван");
+user.sayHi();
