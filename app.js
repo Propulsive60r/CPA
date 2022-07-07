@@ -1,4 +1,4 @@
-const entry = document.querySelector('#entry');
+const $entry = document.querySelector('#entry');
 
 // Create templates
 const colorTemplate = [
@@ -20,41 +20,47 @@ const marginTemplate = [
     '15px',
 ];
 
-entry.style.cssText = `
-${colorTemplate[1]};
-${fontSizeTemplate[2]}
+$entry.style.cssText = `
+${colorTemplate[0]};
+${fontSizeTemplate[0]}
 `;
 
-entry.innerHTML = 'Hello World';
+//$entry.innerHTML = 'Hello World';
 
-class Rectangle {
-    width;
-    height;
+class BlockInput {
+    // price;
+    // amount;
 
-    constructor(w, h) {
-        this.width = w;
-        this.height = h;
-    }
+    constructor() {
+        this.placeholder = ['Price coins', 'Amount coin'];
+        // this.price = price;
+        // this.amount = amount;
+        this.blockPrice = document.createElement('input');
+        this.blockAmount = document.createElement('input');
+        this.blockAdd = document.createElement('span');
+        this.blockDiv = document.createElement('div');
+        this.arr = [this.blockPrice, this.blockAmount, this.blockAdd, this.blockDiv];
+    };
 
-    calcArea () {
-        return this.width * this.height;
-    }
+    createBlockInput() {
+
+        this.blockPrice.placeholder = this.placeholder[0];
+        this.blockAmount.placeholder = this.placeholder[1];
+        this.blockAdd.innerHTML = 'add'
+        this.blockAdd.id = 'addBlock'
+        //this.arr.forEach(e => $entry.after(e));
+        this.arr.forEach(e => document.body.append(e));
+        //this.arr.forEach(e => document.body.prepend(e));
+    };
+
 }
 
-console.log(this)
-class User {
 
-    constructor(name) {
-        console.log(this)
-        this.name = name;
-    }
+const block1 = new BlockInput();
+block1.createBlockInput();
+block1.blockAdd.addEventListener('click', () => {
+    const block2 = new BlockInput();
+    block2.createBlockInput();
 
-    sayHi() {
-        console.log(this);
-    }
+})
 
-}
-
-// Использование:
-let user = new User("Иван");
-user.sayHi();
