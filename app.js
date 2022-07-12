@@ -57,6 +57,7 @@ class BlockInput {
         this.placeholder = ['Price coins', 'Amount coin'];
         // this.price = price;
         // this.amount = amount;
+        this.elementDiv = document.createElement('div');
         this.elementInputePrice = document.createElement('input');
         this.elementInputAmount = document.createElement('input');
         this.elementBlockAdd = document.createElement('span');
@@ -69,33 +70,61 @@ class BlockInput {
         this.elementBlockAdd.id = 'addBlock';
         this.elementBlockDelete.id = 'deleteBlock';
 
-        // main.layout.insertAdjacentElement('beforeend', this.elementInputePrice);
-        // main.layout.insertAdjacentElement('beforeend', this.elementInputAmount);
-        // main.layout.insertAdjacentElement('beforeend', this.elementBlockAdd);
-        // main.layout.insertAdjacentElement('beforeend', this.elementBlockDelete);
 
-        this.arr = [this.elementInputePrice, this.elementInputAmount, this.elementBlockAdd, this.elementBlockDelete];
-        this.arr.forEach(e => main.layout.insertAdjacentElement('beforeend', e));
+
+
+        //this.arr = [this.elementInputePrice, this.elementInputAmount, this.elementBlockAdd, this.elementBlockDelete];
+        //this.arr.forEach(e => main.layout.insertAdjacentElement('beforeend', e));
 
     };
 
     createBlockInput() {
-        this.arr.forEach(e => main.layout.insertAdjacentElement('beforeend', e));
+        main.layout.insertAdjacentElement('beforeend', this.elementDiv);
+        this.elementDiv.insertAdjacentElement('beforeend', this.elementInputePrice);
+        this.elementDiv.insertAdjacentElement('beforeend', this.elementInputAmount);
+        this.elementDiv.insertAdjacentElement('beforeend', this.elementBlockAdd);
+        this.elementDiv.insertAdjacentElement('beforeend', this.elementBlockDelete);
+//        this.arr.forEach(e => main.layout.insertAdjacentElement('beforeend', e));
     };
 
     deleteBlockInput() {
-        this.blockDiv.remove();
+        this.elementDiv.remove();
+        // this.elementInputePrice.remove();
+        // this.elementInputAmount.remove();
+        // this.elementBlockAdd.remove();
+        // this.elementBlockDelete.remove();
     }
 
 }
 
-const block1 = new BlockInput();
+const block0 = new BlockInput();
+block0.createBlockInput();
+block0.elementInputePrice.style.background = 'yellow';
 
-block1.elementBlockAdd.addEventListener('click', () => {
-    //block1.createBlockInput();
-   const block2 = new BlockInput()
-    block2.elementInputePrice.style.background = 'green'
+let counter = 0;
+const arr2 = [];
+
+block0.elementBlockAdd.addEventListener('click', () => {
+
+    arr2[counter] = new BlockInput();
+    arr2[counter].createBlockInput();
+    counter++;
+    //console.log(arr2)
+
 })
+
+block0.elementBlockDelete.addEventListener('click', () => {
+    if(arr2.length) {
+        block0.deleteBlockInput();
+    }
+
+})
+
+
+
+// установить значение для ключа
+//localStorage.test = 2;
+
 
 
 // //block1.createBlockInput();
