@@ -26,6 +26,7 @@ class Layout {
         document.body.append(this.layout);
     }
 }
+
 //=========================================
 //Header Layout
 const header = new Layout('header');
@@ -69,10 +70,6 @@ class BlockInput {
         this.elementBlockDelete.innerHTML = ' delete';
         this.elementBlockAdd.id = 'addBlock';
         this.elementBlockDelete.id = 'deleteBlock';
-
-
-
-
         //this.arr = [this.elementInputePrice, this.elementInputAmount, this.elementBlockAdd, this.elementBlockDelete];
         //this.arr.forEach(e => main.layout.insertAdjacentElement('beforeend', e));
 
@@ -82,8 +79,8 @@ class BlockInput {
         main.layout.insertAdjacentElement('beforeend', this.elementDiv);
         this.elementDiv.insertAdjacentElement('beforeend', this.elementInputePrice);
         this.elementDiv.insertAdjacentElement('beforeend', this.elementInputAmount);
-        this.elementDiv.insertAdjacentElement('beforeend', this.elementBlockAdd);
-        this.elementDiv.insertAdjacentElement('beforeend', this.elementBlockDelete);
+        // this.elementDiv.insertAdjacentElement('beforeend', this.elementBlockAdd);
+        // this.elementDiv.insertAdjacentElement('beforeend', this.elementBlockDelete);
 //        this.arr.forEach(e => main.layout.insertAdjacentElement('beforeend', e));
     };
 
@@ -97,42 +94,45 @@ class BlockInput {
 
 }
 
+//=========================================
+// create start block
 const block0 = new BlockInput();
 block0.createBlockInput();
 block0.elementInputePrice.style.background = 'yellow';
+block0.elementDiv.insertAdjacentElement('beforeend', block0.elementBlockAdd);
 
-let counter = 0;
+
+//=========================================
+// create click block
+
+let counter = -1;
 const arr2 = [];
+console.log('Пустой массив', arr2);
 
-block0.elementBlockAdd.addEventListener('click', () => {
+const addBlock = new Promise((resolve) => {
+    return block0.elementBlockAdd.addEventListener('click',
+        () => {
+            counter++;
+            arr2[counter] = new BlockInput();
+            arr2[counter].createBlockInput();
+            arr2[counter].elementDiv.insertAdjacentElement('beforeend', arr2[counter].elementBlockAdd);
+            arr2[counter].elementDiv.insertAdjacentElement('beforeend', arr2[counter].elementBlockDelete);
+            console.log(`Создали блок -> ${counter + 1}`, `Ключ массива -> ${counter}`, arr2);
+            resolve(arr2);
+        });
+});
 
-    arr2[counter] = new BlockInput();
-    arr2[counter].createBlockInput();
-    counter++;
-    //console.log(arr2)
 
+//=========================================
+// delete click block
+addBlock.then(array  => {
+    array[0].elementBlockDelete.addEventListener('click', () => {
+        console.log(array);
+        //console.log(`Блок перед удалением -> ${counter + 1}`, `Ключ массива -> ${counter}`, arr2);
+        //arr2[counter].deleteBlockInput();
+        //console.log(`Блок после удаления удалением -> ${counter + 1}`, `Ключ массива -> ${counter}`, arr2);
+    })
 })
-
-block0.elementBlockDelete.addEventListener('click', () => {
-    if(arr2.length) {
-        block0.deleteBlockInput();
-    }
-
-})
-
-
 
 // установить значение для ключа
 //localStorage.test = 2;
-
-
-
-// //block1.createBlockInput();
-// //  block1.elementBlockAdd.addEventListener('click', () => {
-// //
-// //      this.blockDiv.insertAdjacentHTML('afterend', '<div>AfterClick</div>');
-// //  })
-// // block1.elementBlockDelete.addEventListener('click', () => {
-// //     //const block2 = new BlockInput();
-// //     block1.deleteBlockInput();
-// // })
