@@ -120,20 +120,22 @@ const addBlock = new Promise((resolve) => {
 const deleteBlock = new Promise((resolve) => {
     blockStart.elementBlockAdd.addEventListener('click',
         () => {
-            array[arrayBlock.length - 1].elementBlockDelete.addEventListener('click', () => {
-                console.log('delete block before click delete', arrayBlock)
-                arrayBlock[arrayBlock.length - 1].deleteBlockInput();
-                arrayBlock.pop();
-                //const newArray = array.filter((f, index) => f !== 'two')
-                console.log('delete block after click delete', arrayBlock)
-                resolve();
+            addBlock.then(r => {
+                r[arrayBlock.length - 1].elementBlockDelete.addEventListener('click', () => {
+                    console.log('delete block before click delete', arrayBlock)
+                    arrayBlock[arrayBlock.length - 1].deleteBlockInput();
+                    arrayBlock.pop();
+                    //const newArray = array.filter((f, index) => f !== 'two')
+                    console.log('delete block after click delete', arrayBlock)
+                    resolve();
+                })
             })
         })
 });
 
 
-addBlock.then(array => {
-    return new Promise((resolve) => {
-
-
-    })
+// addBlock.then(array => {
+//     return new Promise((resolve) => {
+//
+//
+//     })
