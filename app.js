@@ -1,4 +1,5 @@
 // Create templates
+
 const colorTemplate = [
     'color: red',
     'color: green',
@@ -20,6 +21,7 @@ const marginTemplate = [
 
 //=========================================
 //Class DOM - layout
+
 class Layout {
     constructor(div) {
         this.layout = document.createElement(div);
@@ -29,16 +31,19 @@ class Layout {
 
 //=========================================
 //Header Layout
+
 const header = new Layout('header');
 header.layout.innerHTML = 'Header';
 
 //=========================================
 //Main Layout
+
 const main = new Layout('main');
 main.layout.innerHTML = 'Main';
 
 //=========================================
 //Footer Layout
+
 const footer = new Layout('footer');
 footer.layout.innerHTML = 'Footer';
 
@@ -49,6 +54,7 @@ footer.layout.innerHTML = 'Footer';
 
 //=========================================
 // general block class
+
 class BlockInput {
     constructor() {
         this.placeholder = ['Price coins', 'Amount coin'];
@@ -90,10 +96,12 @@ class BlockInput {
 
 //=========================================
 // create array blocks
+
 const arrayBlock = [];
 
 //=========================================
 // create start block
+
 const blockStart = new BlockInput();
 arrayBlock.push(blockStart);
 blockStart.createBlockInput();
@@ -106,10 +114,8 @@ blockStart.elementInputPrice.style.background = 'cyan';
 const addBlock = new Promise((resolve) => {
     blockStart.elementBlockAdd.addEventListener('click',
         () => {
-            console.log('add block before click add', arrayBlock)
             arrayBlock.push(new BlockInput());
             arrayBlock[arrayBlock.length - 1].createBlockInput();
-            console.log('add block after click add', arrayBlock)
             resolve(arrayBlock);
         });
 });
@@ -122,11 +128,8 @@ const deleteBlock = new Promise((resolve) => {
         () => {
             addBlock.then(r => {
                 r[arrayBlock.length - 1].elementBlockDelete.addEventListener('click', () => {
-                    console.log('delete block before click delete', arrayBlock)
                     arrayBlock[arrayBlock.length - 1].deleteBlockInput();
                     arrayBlock.pop();
-                    //const newArray = array.filter((f, index) => f !== 'two')
-                    console.log('delete block after click delete', arrayBlock)
                     resolve();
                 })
             })
@@ -134,8 +137,4 @@ const deleteBlock = new Promise((resolve) => {
 });
 
 
-// addBlock.then(array => {
-//     return new Promise((resolve) => {
-//
-//
-//     })
+
