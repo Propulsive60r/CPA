@@ -69,8 +69,8 @@ class BlockInput {
         this.elementInputAmount.placeholder = this.placeholder[1];
         this.elementBlockAdd.innerHTML = 'add';
         this.elementBlockDelete.innerHTML = ' delete';
-        this.elementBlockAdd.id = 'addBlock';
-        this.elementBlockDelete.id = 'deleteBlock';
+        // this.elementBlockAdd.id = 'addBlock';
+        // this.elementBlockDelete.id = 'deleteBlock';
         //this.arr = [this.elementInputePrice, this.elementInputAmount, this.elementBlockAdd, this.elementBlockDelete];
         //this.arr.forEach(e => main.layout.insertAdjacentElement('beforeend', e));
     };
@@ -113,7 +113,8 @@ blockStart.elementInputPrice.style.background = 'cyan';
 
 const addBlock = new Promise((resolve) => {
     blockStart.elementBlockAdd.addEventListener('click',
-        () => {
+        (event) => {
+            console.log(arrayBlock[arrayBlock.length - 1])
             arrayBlock.push(new BlockInput());
             arrayBlock[arrayBlock.length - 1].createBlockInput();
             resolve(arrayBlock);
@@ -124,13 +125,16 @@ const addBlock = new Promise((resolve) => {
 // delete click block
 
 const deleteBlock = new Promise((resolve) => {
-    blockStart.elementBlockAdd.addEventListener('click',
+
+    arrayBlock[arrayBlock.length - 1].blockDiv.addEventListener('click',
         () => {
+            //console.log('родительский')
             addBlock.then(r => {
-                r[arrayBlock.length - 1].elementBlockDelete.addEventListener('click', () => {
-                    arrayBlock[arrayBlock.length - 1].deleteBlockInput();
-                    arrayBlock.pop();
-                    resolve();
+                r[r.length - 1].elementBlockDelete.addEventListener('click', (event) => {
+                    console.log('дочерний')
+                        console.log(event.target)
+                    r[r.length - 1].deleteBlockInput();
+                    r.pop();
                 })
             })
         })
